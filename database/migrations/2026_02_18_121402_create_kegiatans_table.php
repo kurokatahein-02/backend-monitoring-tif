@@ -1,0 +1,28 @@
+<?php
+
+// File: database/migrations/xxxx_xx_xx_xxxxxx_create_kegiatans_table.php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('kegiatans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_kegiatan');
+            // Membuat foreign key unit_id yang terhubung ke tabel units
+            $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->enum('status', ['Open', 'Close'])->default('Open');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('kegiatans');
+    }
+};
