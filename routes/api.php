@@ -12,6 +12,13 @@ use App\Http\Controllers\DashboardController; // Jangan lupa tambahkan ini di at
 
 Route::post('/login', [AuthController::class, 'login']);
 
+ Route::get('/test-koneksi', function () {
+    return response()->json([
+        'message' => 'Halo Nafa! Data dari Laravel berhasil ditarik ke React.',
+        'status' => 'Success'
+    ]);
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     
